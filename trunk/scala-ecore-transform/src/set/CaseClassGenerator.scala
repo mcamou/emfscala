@@ -38,6 +38,7 @@ trait ScalaGeneratorSupport extends EmfModelSupport with CollectionSupport {
 	
 	def scalaPrimitiveTypeName (t: EClassifier) = t.getName match {
 	    case "EBoolean" => "Boolean"
+	    case "EBigDecimal" => "Int" // TODO needs to be changed at some point
 	    case "EInt"     => "Int"
         case "EString"  => "String"
         case "String"   => "String"

@@ -11,10 +11,13 @@ import org.eclipse.emf.ecore.xmi.impl._
 object Main extends AnyRef with EmfModelSupport {
     def main (args: Array[String]) {
         val start = System.currentTimeMillis
-        val model = readModel ("model/ExprDemo.ecore") 
+        val model: EPackage = readModel ("model/ExprDemo.ecore").asInstanceOf[EPackage] 
         val afterRead = System.currentTimeMillis
         
-        val out = new FileWriter ("src-gen/output.scala")
+        val packageName = model.getName().substring(0,1).toLowerCase()+model.getName().substring(1)
+        
+        val out = new FileWriter ("src-gen/"+packageName+"/"+model.getName()+".scala")
+        out.write("package "+packageName+"\n\n")
         model.eAllContents.typeSelect[EClass].foreach (cls => out.write (ClassGenerator (cls).classCode))
         out.close
         
