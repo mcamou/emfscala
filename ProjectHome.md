@@ -1,0 +1,1 @@
+This project intends to develop a code generator from Ecore files to Scala code.
